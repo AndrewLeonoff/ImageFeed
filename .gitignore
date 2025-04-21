@@ -1,0 +1,24 @@
+# macOS
+## Вспомогательные системные файлы.
+.DS_Store
+.AppleDouble
+.LSOverride
+
+## Файлы кеша предпросмотра
+._*
+
+# Xcode
+## Пользовательские настройки.
+xcuserdata/
+
+## Состояние проверок воркспейса
+IDEWorkspaceChecks.plist
+
+## Playgrounds
+timeline.xctimeline
+playground.xcworkspace
+
+## Файлы, создаваемые при сборке проекта.
+DerivedData/
+*.hmap
+*.ipa
