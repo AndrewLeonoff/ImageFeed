@@ -7,11 +7,17 @@
 
 import UIKit
 
+// MARK: - ImagesListViewController
+
 final class ImagesListViewController: UIViewController {
     
-    @IBOutlet private var tableView: UITableView!
+    // MARK: - IBOutlets
     
-    private let photosName: [String] = Array(0..<20).map{ "\($0)" }
+    @IBOutlet private weak var tableView: UITableView!
+    
+    // MARK: - Private Properties
+    
+    private let photoNames: [String] = (0..<20).map(String.init)
     
     private lazy var dateFormatter: DateFormatter = {
         let formatter = DateFormatter()
@@ -19,6 +25,8 @@ final class ImagesListViewController: UIViewController {
         formatter.timeStyle = .none
         return formatter
     }()
+    
+    // MARK: - Lifecycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -31,26 +39,47 @@ final class ImagesListViewController: UIViewController {
     }
 }
 
-extension ImagesListViewController {
+// MARK: - Private Methods
+
+private extension ImagesListViewController {
     func configCell(for cell: ImagesListCell, with indexPath: IndexPath) {
-        guard let image = UIImage(named: photosName[indexPath.row]) else {
+        configureImage(for: cell, at: indexPath)
+        configureDate(for: cell)
+        configureLikeButton(for: cell, at: indexPath)
+    }
+    
+    func configureImage(for cell: ImagesListCell, at indexPath: IndexPath) {
+        guard let image = UIImage(named: photoNames[indexPath.row]) else {
+            assertionFailure("Image not found for name: \(photoNames[indexPath.row])")
+            return
+        }
+        cell.cellImage.image = image
+    }
+    
+    func configureDate(for cell: ImagesListCell) {
+        cell.dateLabel.text = dateFormatter.string(from: Date())
+    }
+    
+    func configureLikeButton(for cell: ImagesListCell, at indexPath: IndexPath) {
+        let isLiked = indexPath.row % 2 == 0
+        let likeImageName = isLiked ? "like_button_on" : "like_button_off"
+        
+        guard let likeImage = UIImage(named: likeImageName) else {
+            assertionFailure("Like image not found: \(likeImageName)")
             return
         }
         
-        cell.cellImage.image = image
-        cell.dateLabel.text = dateFormatter.string(from: Date())
-        
-        let isLiked = indexPath.row % 2 == 0
-        let likeImage = isLiked ? UIImage(named: "like_button_on") : UIImage(named: "like_button_off")
         cell.likeButton.setImage(likeImage, for: .normal)
     }
 }
+
+// MARK: - UITableViewDelegate
 
 extension ImagesListViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) { }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        guard let image = UIImage(named: photosName[indexPath.row]) else {
+        guard let image = UIImage(named: photoNames[indexPath.row]) else {
             return 0
         }
         
@@ -64,9 +93,11 @@ extension ImagesListViewController: UITableViewDelegate {
     }
 }
 
+// MARK: - UITableViewDataSource
+
 extension ImagesListViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return photosName.count
+        photoNames.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
