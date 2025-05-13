@@ -46,12 +46,12 @@ final class ProfileViewController: UIViewController {
     }()
     
     private lazy var logoutButton: UIButton = {
+        let image = UIImage(named: "logout_button")!.withRenderingMode(.alwaysOriginal)
         let button = UIButton.systemButton(
-            with: UIImage(named: "logout_button")!,
+            with: image,
             target: self,
             action: #selector(Self.didTapLogoutButton)
         )
-        button.tintColor = .red
         button.translatesAutoresizingMaskIntoConstraints = false
         
         return button
@@ -128,5 +128,6 @@ final class ProfileViewController: UIViewController {
         )
     }
     
+    // MARK: - TODO
     @objc private func didTapLogoutButton() { }
 }
