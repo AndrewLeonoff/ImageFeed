@@ -77,18 +77,26 @@
                                     <wkPreferences key="preferences"/>
                                 </wkWebViewConfiguration>
                             </wkWebView>
+                            <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" progress="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="xfB-zU-Ttf">
+                                <rect key="frame" x="0.0" y="162" width="393" height="4"/>
+                                <color key="progressTintColor" red="0.10196078431372549" green="0.10588235294117647" blue="0.13333333333333333" alpha="1" colorSpace="calibratedRGB"/>
+                            </progressView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="Xq8-fD-vgP"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="zlm-E6-okS" firstAttribute="leading" secondItem="qpT-CC-yEE" secondAttribute="leading" id="Bgb-qf-NwU"/>
+                            <constraint firstItem="xfB-zU-Ttf" firstAttribute="top" secondItem="Xq8-fD-vgP" secondAttribute="top" id="FC2-ZS-WmT"/>
                             <constraint firstAttribute="trailing" secondItem="zlm-E6-okS" secondAttribute="trailing" id="YCP-41-GBT"/>
+                            <constraint firstItem="Xq8-fD-vgP" firstAttribute="trailing" secondItem="xfB-zU-Ttf" secondAttribute="trailing" id="a1c-Sq-fZl"/>
                             <constraint firstItem="zlm-E6-okS" firstAttribute="top" secondItem="Xq8-fD-vgP" secondAttribute="top" id="fNN-Q1-G3q"/>
+                            <constraint firstItem="xfB-zU-Ttf" firstAttribute="leading" secondItem="Xq8-fD-vgP" secondAttribute="leading" id="vJc-V4-iD5"/>
                             <constraint firstAttribute="bottom" secondItem="zlm-E6-okS" secondAttribute="bottom" id="xCD-Hu-Rd9"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="YXR-nt-A7O"/>
                     <connections>
+                        <outlet property="progressView" destination="xfB-zU-Ttf" id="yGD-fZ-4j1"/>
                         <outlet property="webView" destination="zlm-E6-okS" id="DAW-z1-Eif"/>
                     </connections>
                 </viewController>
@@ -132,7 +140,7 @@
                                                         <constraint firstAttribute="width" constant="44" id="iBo-v7-pd4"/>
                                                     </constraints>
                                                     <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
-                                                    <state key="normal" image="Active"/>
+                                                    <state key="normal" image="like_button_on"/>
                                                 </button>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="27 августа 2022" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Jgb-k8-ZFD" userLabel="Date Label">
                                                     <rect key="frame" x="24" y="204" width="343" height="16"/>
@@ -213,7 +221,7 @@
                                     <constraint firstAttribute="width" constant="48" id="a0o-q7-yye"/>
                                 </constraints>
                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
-                                <state key="normal" image="back_button"/>
+                                <state key="normal" image="nav_back_button_white"/>
                                 <connections>
                                     <action selector="didTapBackButton" destination="Rqz-FG-Ntd" eventType="touchUpInside" id="d1O-cm-Zsj"/>
                                 </connections>
@@ -313,9 +321,9 @@
     </scenes>
     <resources>
         <image name="0" width="1600" height="1059"/>
-        <image name="Active" width="44" height="44"/>
         <image name="auth_screen_logo" width="60" height="60"/>
-        <image name="back_button" width="24" height="24"/>
+        <image name="like_button_on" width="44" height="44"/>
+        <image name="nav_back_button_white" width="24" height="24"/>
         <image name="share_button" width="50" height="50"/>
         <image name="tab_editorial_active" width="30" height="30"/>
         <image name="tab_profile_active" width="30" height="30"/>
