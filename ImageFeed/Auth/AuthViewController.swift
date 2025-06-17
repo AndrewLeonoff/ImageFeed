@@ -11,6 +11,8 @@ final class AuthViewController: UIViewController {
     private let showWebViewSegueIdentifier = "ShowWebView"
     private let oauth2Service = OAuth2Service.shared
     
+    weak var delegate: AuthViewControllerDelegate?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -41,10 +43,11 @@ final class AuthViewController: UIViewController {
 
 extension AuthViewController: WebViewViewControllerDelegate {
     func webViewViewController(_ vc: WebViewViewController, didAuthenticateWithCode code: String) {
+        vc.dismiss(animated: true)
         oauth2Service.fetchOAuthToken(code) { result in
             switch result {
             case .success:
-                print("Some code")
+                self.delegate?.didAuthenticate(self)
             case .failure(let error):
                 print(error.localizedDescription)
             }
