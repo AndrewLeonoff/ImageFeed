@@ -13,6 +13,7 @@ final class OAuth2Service {
     private init() {}
     
     private let storage = OAuth2TokenStorage()
+    private let decoder = JSONDecoder()
     
     private func makeOAuthTokenRequest(code: String) -> URLRequest {
         let baseURL = URL(string: "https://unsplash.com")!
@@ -38,7 +39,6 @@ final class OAuth2Service {
             switch result {
             case .success(let data):
                 do {
-                    let decoder = JSONDecoder()
                     let response = try decoder.decode(OAuthTokenResponseBody.self, from: data)
                     let token = response.accessToken
                     storage.token = token
